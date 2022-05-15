@@ -12,6 +12,7 @@ import Callout from '../../components/callout';
 import SEO from '../../components/SEO';
 import styled from 'styled-components';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 const H1 = styled.h1``;
 
@@ -21,17 +22,7 @@ const H3 = styled.h3``;
 
 const Div = styled.div``;
 
-const P = styled.p`
-  margin: 0 0rem;
-`;
-
-const A = styled.a`
-  color: blue;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+const P = styled.p``;
 
 const Ul = styled.ul``;
 
@@ -39,10 +30,22 @@ const Ol = styled.ul``;
 
 const Li = styled.li``;
 
+const Code = styled.code`
+  background-color: gray;
+  color: white;
+  padding: 0 4px;
+`;
+
 const Post: NextPage = ({ post }: any) => {
-  const { theme } = useTheme();
-  console.log(theme);
-  console.log(post);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <>
       <SEO title={post.title} />
@@ -54,7 +57,6 @@ const Post: NextPage = ({ post }: any) => {
           h3: (props) => <H3 {...props} />,
           div: (props) => <Div {...props} />,
           p: (props) => <P {...props} />,
-          a: (props) => <A {...props} />,
           ul: (props) => <Ul {...props} />,
           ol: (props) => <Ol {...props} />,
           li: (props) => <Li {...props} />,
@@ -64,20 +66,21 @@ const Post: NextPage = ({ post }: any) => {
             const match = /language-(\w+)/.exec(className || '');
             return match ? (
               <SyntaxHighlighter
-                customStyle={{ fontSize: '16px' }}
                 // eslint-disable-next-line react/no-children-prop
                 children={String(children).replace(/\n$/, '')}
                 //@ts-ignore
-                style={theme === 'light' ? atelierCaveLight : atelierCaveDark}
-                //this converts 'js' to 'avascript' from match[] as 'js' does not seem to highlight correctly
+                style={
+                  resolvedTheme === 'dark' ? atelierCaveDark : atelierCaveLight
+                }
+                //this converts 'js' to 'javascript' from match[] as 'js' does not highlight correctly
                 language={match[1] === 'js' ? 'javascript' : match[1]}
                 PreTag="code"
                 {...props}
               />
             ) : (
-              <code className={className} {...props}>
+              <Code className={className} {...props}>
                 {children}
-              </code>
+              </Code>
             );
           },
         }}

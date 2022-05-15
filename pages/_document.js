@@ -39,12 +39,16 @@ export default class MyDocument extends Document {
           />
           {/* eslint-disable-next-line @next/next/google-font-display */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=block"
+            href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,700;1,700&display=swap"
             rel="stylesheet"
           />
           {/* eslint-disable-next-line @next/next/google-font-display */}
           <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400;700&display=block"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=block"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
             rel="stylesheet"
           />
         </Head>

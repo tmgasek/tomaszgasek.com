@@ -2,6 +2,7 @@ import type { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 import { getSanityContent } from '../../utils/sanity';
 import SEO from '../../components/SEO';
+import PostCard from '../../components/post-card';
 
 const Posts = ({ posts }: any) => {
   return (
@@ -11,11 +12,9 @@ const Posts = ({ posts }: any) => {
         <h1>Posts</h1>
 
         <ul>
-          {posts.map(({ title, slug }: any) => (
-            <li key={slug}>
-              <Link href={`/posts/${slug}`}>
-                <a>{title}</a>
-              </Link>
+          {posts.map((post: any) => (
+            <li key={post.slug}>
+              <PostCard post={post} />
             </li>
           ))}
         </ul>

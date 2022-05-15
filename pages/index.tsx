@@ -6,6 +6,7 @@ const Home: NextPage = ({ posts }: any) => {
     <div>
       <SEO title="Home" />
       <h1>Tomasz Gasek</h1>
+      <a>this is a link</a>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe expedita
         tempore harum, dignissimos ab officia aliquid rem illo eaque corrupti

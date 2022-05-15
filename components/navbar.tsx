@@ -8,19 +8,20 @@ const FlexContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+
+  a {
+    text-transform: uppercase;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const LinkContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-
-  a {
-    text-transform: uppercase;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 `;
 
 const links = [
@@ -58,7 +59,9 @@ const Navbar = () => {
     <nav>
       <div>
         <FlexContainer>
-          <Link href="/">{'{tmg}'}</Link>
+          <Link href="/">
+            <a>{'{tmg}'}</a>
+          </Link>
           <ThemeSwitch />
           <LinkContainer>
             {links.map(({ name, href }) => (
