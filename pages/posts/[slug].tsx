@@ -13,6 +13,10 @@ import SEO from '../../components/SEO';
 import styled from 'styled-components';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { getPostBySlug } from '../../lib/queries';
+import Image from 'next/image';
+import { Post } from '../../types';
+const readingTime = require('reading-time');
 
 const H1 = styled.h1``;
 
@@ -36,7 +40,36 @@ const Code = styled.code`
   padding: 0 4px;
 `;
 
-const Post: NextPage = ({ post }: any) => {
+interface Props {
+  post: Post;
+}
+
+const StyledImage = styled(Image)`
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
+`;
+
+const Flex = styled.div`
+  font-style: italic;
+  color: gray;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+`;
+
+const Divider = styled.div`
+  margin: 10px 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--fg);
+`;
+
+const PostPage: NextPage = ({ post, timeToRead }: Props) => {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -49,6 +82,24 @@ const Post: NextPage = ({ post }: any) => {
   return (
     <>
       <SEO title={post.title} />
+      <H1>{post.title}</H1>
+      <Flex>
+        <div>
+          by <span>{post.author.name} / </span>
+          <span>{new Date(post.publishedAt).toDateString()}</span>
+        </div>
+        <span>{timeToRead}</span>
+      </Flex>
+      {post.mainImage ? (
+        <StyledImage
+          src={post.mainImage.asset.url}
+          width={1080}
+          height={480}
+          alt="cover"
+        />
+      ) : (
+        <Divider />
+      )}
       <MDXRemote
         {...post.content}
         components={{
@@ -89,39 +140,21 @@ const Post: NextPage = ({ post }: any) => {
   );
 };
 
-export default Post;
+export default PostPage;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = await getSanityContent({
-    query: `
-    query PostBySlug($slug: String!) {
-      allPost(where: { slug: { current: { eq: $slug } } }) {
-        title
-        content
-        featured
-        author {
-          name
-          image {
-            asset {
-              url
-            }
-          }
-        }
-        publishedAt
-      }
-    }
-    
-    `,
-    variables: {
-      slug: params?.slug,
-    },
-  });
+  const data = await getPostBySlug(params);
+  // we get an array back with 1 element so we destructure it
   const [postData] = data.allPost;
+  const timeToRead = readingTime(postData.content);
+  // parse mdx content
   const content = await serialize(postData.content);
+  // replacing old field with parsed content
   const post = { ...postData, content };
   return {
     props: {
       post,
+      timeToRead: timeToRead.text,
     },
     revalidate: 10,
   };

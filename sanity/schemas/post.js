@@ -42,6 +42,11 @@ export default {
       },
     },
     {
+      name: 'excerpt',
+      title: 'Post Excerpt',
+      type: 'string',
+    },
+    {
       name: 'content',
       title: 'Content',
       type: 'markdown',

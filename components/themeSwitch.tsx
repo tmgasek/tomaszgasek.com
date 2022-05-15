@@ -5,10 +5,19 @@ import { MdOutlineNightlight } from 'react-icons/md';
 import styled from 'styled-components';
 
 const ThemeButton = styled.button`
+  background-color: ${(props) =>
+    props.theme === 'dark' ? '#4252686c' : '#dfb2498d'};
   border: none;
   border-radius: 10px;
-  padding: 4px 8px;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
   font-size: 1rem;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.theme === 'dark' ? '#425268' : '#dfb249'};
+  }
 `;
 
 const ThemeSwitch = () => {
@@ -27,6 +36,7 @@ const ThemeSwitch = () => {
       <div>
         {resolvedTheme === 'dark' ? (
           <ThemeButton
+            theme={resolvedTheme}
             onClick={() =>
               setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
             }
@@ -35,6 +45,7 @@ const ThemeSwitch = () => {
           </ThemeButton>
         ) : (
           <ThemeButton
+            theme={resolvedTheme}
             onClick={() =>
               setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
             }

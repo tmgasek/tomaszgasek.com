@@ -4,11 +4,15 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --fg: #0d0d0d;
     --bg: #f5f5f5;
+    --hover: #3d3d3d;
+    --secondary: #aaa
   }
 
   [data-theme="dark"] {
     --fg: #fff;
-    --bg: #121212;
+    --bg: #181818;
+    --hover: #3d3d3d;
+    --secondary: #aaa
   }
   
   html, body{
@@ -42,5 +46,7 @@ export const GlobalStyle = createGlobalStyle`
   code {
     font-family: 'Fira Code';
     line-height: normal;
+    word-wrap: break-word;
+
   }
 `;

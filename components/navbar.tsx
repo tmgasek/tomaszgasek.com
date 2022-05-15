@@ -33,10 +33,10 @@ const links = [
     name: 'Posts',
     href: '/posts',
   },
-  {
-    name: 'Projects',
-    href: '/projects',
-  },
+  // {
+  //   name: 'Projects',
+  //   href: '/projects',
+  // },
 ];
 
 const LinkItem = ({ href, children, currPath }: any) => {
@@ -59,10 +59,6 @@ const Navbar = () => {
     <nav>
       <div>
         <FlexContainer>
-          <Link href="/">
-            <a>{'{tmg}'}</a>
-          </Link>
-          <ThemeSwitch />
           <LinkContainer>
             {links.map(({ name, href }) => (
               <LinkItem key={name} href={href} currPath={router.pathname}>
@@ -70,6 +66,7 @@ const Navbar = () => {
               </LinkItem>
             ))}
           </LinkContainer>
+          <ThemeSwitch />
         </FlexContainer>
       </div>
     </nav>
