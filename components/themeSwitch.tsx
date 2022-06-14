@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
-import { MdOutlineLightMode } from 'react-icons/md';
-import { MdOutlineNightlight } from 'react-icons/md';
-import styled from 'styled-components';
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
+import { MdOutlineLightMode } from "react-icons/md";
+import { MdOutlineNightlight } from "react-icons/md";
+import styled from "styled-components";
 
 const ThemeButton = styled.button`
   background-color: ${(props) =>
-    props.theme === 'dark' ? '#4252686c' : '#dfb2498d'};
+    props.theme === "dark" ? "#4252686c" : "#dfb2498d"};
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -16,7 +16,7 @@ const ThemeButton = styled.button`
 
   &:hover {
     background-color: ${(props) =>
-      props.theme === 'dark' ? '#425268' : '#dfb249'};
+      props.theme === "dark" ? "#425268" : "#dfb249"};
   }
 `;
 
@@ -34,11 +34,11 @@ const ThemeSwitch = () => {
   return (
     <div>
       <div>
-        {resolvedTheme === 'dark' ? (
+        {resolvedTheme === "dark" ? (
           <ThemeButton
             theme={resolvedTheme}
             onClick={() =>
-              setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
             }
           >
             <MdOutlineNightlight />
@@ -47,7 +47,7 @@ const ThemeSwitch = () => {
           <ThemeButton
             theme={resolvedTheme}
             onClick={() =>
-              setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
             }
           >
             <MdOutlineLightMode />

@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import styled from 'styled-components';
-import { Post } from '../types';
+import Image from "next/image";
+import Link from "next/link";
+import styled from "styled-components";
+import { Post } from "../types";
 
 interface Props {
   post: Post;
@@ -10,7 +10,7 @@ interface Props {
 const PostWrapper = styled.div<any>`
   margin-bottom: 12px;
 
-  h3 {
+  h4 {
     max-width: fit-content;
     cursor: pointer;
     margin: 0;
@@ -55,7 +55,7 @@ const AuthorWrapper = styled.div`
 
   h5 {
     margin: 0;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-weight: normal;
   }
 
@@ -65,7 +65,7 @@ const AuthorWrapper = styled.div`
 `;
 
 const PostLink = styled.a`
-  font-family: 'Ubuntu';
+  font-family: "Ubuntu";
   font-size: larger;
 `;
 
@@ -75,25 +75,27 @@ const PostCard = ({ post }: Props) => {
       <PostWrapper imgUrl={post.mainImage?.asset.url}>
         <SpaceBetween>
           <Link href={`/posts/${post.slug.current}`} passHref>
-            <h3>
+            <h4>
               <PostLink>{post.title}</PostLink>
-            </h3>
+            </h4>
           </Link>
           <span>{new Date(post.publishedAt).toDateString()}</span>
         </SpaceBetween>
         <p>{post.excerpt}</p>
         <AuthorWrapper>
-          <div>
-            {post.author?.image && (
-              <Image
-                src={post.author.image.asset.url}
-                width={25}
-                height={20}
-                alt={post.author.name}
-              />
-            )}
-            <h5>{post.author?.name}</h5>
-          </div>
+          {post.author.name !== "Tomasz Gasek" ? (
+            <div>
+              {post.author?.image ? (
+                <Image
+                  src={post.author.image.asset.url}
+                  width={25}
+                  height={20}
+                  alt={post.author.name}
+                />
+              ) : null}
+              <h5>{post.author?.name}</h5>
+            </div>
+          ) : null}
         </AuthorWrapper>
       </PostWrapper>
     </div>

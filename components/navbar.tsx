@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import ThemeSwitch from './themeSwitch';
+import styled, { css } from "styled-components";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import ThemeSwitch from "./themeSwitch";
 
 const FlexContainer = styled.div`
   display: flex;
@@ -26,12 +26,12 @@ const LinkContainer = styled.div`
 
 const links = [
   {
-    name: 'Home',
-    href: '/',
+    name: "Home",
+    href: "/",
   },
   {
-    name: 'Posts',
-    href: '/posts',
+    name: "Posts",
+    href: "/posts",
   },
   // {
   //   name: 'Projects',

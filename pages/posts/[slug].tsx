@@ -1,22 +1,22 @@
 // @ts-nocheck
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { getSanityContent } from '../../utils/sanity';
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { getSanityContent } from "../../utils/sanity";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote } from "next-mdx-remote";
+import SyntaxHighlighter from "react-syntax-highlighter";
 import {
   atelierCaveDark,
   atelierCaveLight,
-} from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import Callout from '../../components/callout';
-import SEO from '../../components/SEO';
-import styled from 'styled-components';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { getPostBySlug } from '../../lib/queries';
-import Image from 'next/image';
-import { Post } from '../../types';
-const readingTime = require('reading-time');
+} from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import Callout from "../../components/callout";
+import SEO from "../../components/SEO";
+import styled from "styled-components";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { getPostBySlug } from "../../lib/queries";
+import Image from "next/image";
+import { Post } from "../../types";
+const readingTime = require("reading-time");
 
 const H1 = styled.h1``;
 
@@ -114,17 +114,17 @@ const PostPage: NextPage = ({ post, timeToRead }: Props) => {
 
           Callout,
           code({ className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || '');
+            const match = /language-(\w+)/.exec(className || "");
             return match ? (
               <SyntaxHighlighter
                 // eslint-disable-next-line react/no-children-prop
-                children={String(children).replace(/\n$/, '')}
+                children={String(children).replace(/\n$/, "")}
                 //@ts-ignore
                 style={
-                  resolvedTheme === 'dark' ? atelierCaveDark : atelierCaveLight
+                  resolvedTheme === "dark" ? atelierCaveDark : atelierCaveLight
                 }
                 //this converts 'js' to 'javascript' from match[] as 'js' does not highlight correctly
-                language={match[1] === 'js' ? 'javascript' : match[1]}
+                language={match[1] === "js" ? "javascript" : match[1]}
                 PreTag="code"
                 {...props}
               />
@@ -177,6 +177,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: posts.map((post: any) => `/posts/${post.slug.current}`),
-    fallback: 'blocking',
+    fallback: "blocking",
   };
 };

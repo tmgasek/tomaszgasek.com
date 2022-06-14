@@ -1,4 +1,4 @@
-import { getSanityContent } from '../utils/sanity';
+import { getSanityContent } from "../utils/sanity";
 
 export const getAllPostsOverviews = async () => {
   return await getSanityContent({

@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components';
-import Head from 'next/head';
-import { motion } from 'framer-motion';
+import styled, { css } from "styled-components";
+import Head from "next/head";
+import { motion } from "framer-motion";
 
 const Container = styled.div`
-  max-width: 768px;
+  max-width: 672px;
   margin: auto;
   padding: 4rem 2rem;
 `;
